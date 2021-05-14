@@ -28,6 +28,7 @@ useEffect(() => {
 
 }, []);			
 
+
 const history = useHistory()
 const Deletedata = (e)=>{
 	e.preventDefault();
@@ -39,7 +40,7 @@ const Deletedata = (e)=>{
 		}).then(res => res.json())
 			  .then(
 				(result) => {
-					history.push(`/usermanagement/listuser/`)
+					history.push(`/usermanagement/listuserpage/`+match.params.page)
 				
 			});	
 			
@@ -47,7 +48,7 @@ const Deletedata = (e)=>{
 }
 
 const Back = ()=>{
-	history.push(`/usermanagement/listuser/`)
+	history.push(`/usermanagement/listuserpage/`+match.params.page)
 }
 
   const user = listuser.find( user => user.id.toString() === match.params.id)

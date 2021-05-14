@@ -25,26 +25,26 @@ const getBadge = status => {
 
 const Users = ({match}) => {
   const history = useHistory()
-  const [page, setPage] = useState(1)
+  const [page, setPage] = useState(parseInt(match.params.page))
   const [loading, setLoading] = useState(true)
   const [userlist, setuserlist] = useState(usersData.usersData)
     
 	
 
 const fetchData = () => {
-	fetch("https://sharingvision-backend.herokuapp.com/user/5/1")
+	fetch("https://sharingvision-backend.herokuapp.com/user/5/"+parseInt(match.params.page))
       .then(res => res.json())
       .then(
         (result) => {
+		  let numb = 5*(parseInt(match.params.page)-1)
 		  let Datalist = []
 		  let j=0
-		  for(var i = 0;i<5;i++){ 
+		  for(var i = numb;i<(numb+5);i++){ 
 		     if(result.data[j])
 				Datalist[i] = result.data[j]
 			 j++
 		  }
 		  setuserlist(Datalist)
-		  console.log(Datalist)
 		  setLoading(false);
 		});	
 	
@@ -76,6 +76,7 @@ useEffect(() => {
 		  setPage(newPage)
 		  setLoading(false)
 		  console.log(page)
+		  history.push(`/usermanagement/listuserpage/`+newPage)
 		});	
   }
 

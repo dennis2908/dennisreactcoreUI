@@ -25,6 +25,7 @@ const Tooltips = React.lazy(() => import('./views/base/tooltips/Tooltips'));
 const AddUser = React.lazy(() => import('./views/usermanagement/create-user/CreateUser'));
 const ListUsers = React.lazy(() => import('./views/usermanagement/list-user/Users'));
 const ListUser = React.lazy(() => import('./views/usermanagement/list-user/User'));
+const UsersPage = React.lazy(() => import('./views/usermanagement/list-user/UsersPage'));
 //
 
 const BrandButtons = React.lazy(() => import('./views/buttons/brand-buttons/BrandButtons'));
@@ -58,7 +59,8 @@ const routes = [
   
   { path: '/usermanagement/adduser', name: 'AddUser', component: AddUser },
   { path: '/usermanagement/listuser', name: 'ListUsers', component: ListUsers },
-  { path: '/usermanagement/listusers/:id', name: 'List User Details', component: ListUser },
+  { path: '/usermanagement/listusers/:id/:page', name: 'List User Details', component: ListUser },
+  { path: '/usermanagement/listuserpage/:page', name: 'List User Details', component: UsersPage },
   
   //
   
