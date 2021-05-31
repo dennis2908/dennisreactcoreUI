@@ -1,31 +1,53 @@
 import React, { useState, useEffect } from 'react'
-import { CCard,CSpinner, CCardBody, CCardFooter,CCardHeader, CCol, CRow,CButton } from '@coreui/react'
+import {validURL} from '../../genFunctions/genFunctions'
+import { CCard,CSpinner, CImg, CCardBody, CCardFooter,CCardHeader, CCol, CRow,CButton } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { useHistory } from 'react-router-dom'
 
-import usersData from './UsersData'
+//import usersData from './UsersData'
 
-const User = ({match}) => {
- const [listuser, setlistuser] = useState(usersData.usersData)
+ const Contact = ({match}) => {
+ const [listuser, setlistuser] = useState([])
  const [spinnerShow, setspinnerShow] = useState('block')
- 
-useEffect(() => {
 
+useEffect(() => {
+ 
   const fetchData = () => {
-	 fetch("https://sharingvision-backend.herokuapp.com/user/"+match.params.id)
+	  fetch("https://simple-contact-crud.herokuapp.com/contact/"+match.params.id)
       .then(res => res.json())
       .then(
         (result) => {
-		  setlistuser(result.data)
+		//	   console.log(result.data[0])
+		  setlistuser(Array(result.data))
+		
 		  setspinnerShow('none')
-		});	
+		}).catch((error) => {
+  console.log(error)
+    setspinnerShow('none')
+});	
 	
 }
   fetchData();
 
 }, [match.params.id]);			
 
-
+const fetchUser = (listuser) => {
+	//console.log(listuser)
+	//console.log(Object.keys(listuser).length)
+	if(Object.keys(listuser).length > 0){
+		//console.log(listuser)
+		return listuser.find( user => (user.id.toString()) === (match.params.id.toString()))
+	}
+		
+	
+}
+const columnFilterPhoto = (photo) => {
+    if(validURL(photo)){
+		return <CImg src={photo} fluid={false} className="mb-2" width={100} height={60} shape={"rounded-circle"} />
+	}
+	else
+		return "N/A"
+  }
 const history = useHistory()
 const Deletedata = (e)=>{
 	e.preventDefault();
@@ -37,7 +59,7 @@ const Deletedata = (e)=>{
 		}).then(res => res.json())
 			  .then(
 				(result) => {
-					history.push(`/usermanagement/listuserpage/`+match.params.page)
+					history.push(`/contactmanagement/listcontact?page=`+match.params.page)
 				
 			});	
 			
@@ -45,10 +67,11 @@ const Deletedata = (e)=>{
 }
 
 const Back = ()=>{
-	history.push(`/usermanagement/listuserpage/`+match.params.page)
+	history.push(`/contactmanagement/listcontact?page=`+match.params.page)
 }
 
-  const user = listuser.find( user => user.id.toString() === match.params.id)
+  const user = fetchUser(listuser)
+  
   const userDetails = user ? Object.entries(user) : 
     [['id', (<span><CIcon className="text-muted" name="cui-icon-ban" /> Not found</span>)]]
 
@@ -69,6 +92,9 @@ const Back = ()=>{
                 <tbody>
                   {
                     userDetails.map(([key, value], index) => {
+						if(key==="photo"){
+							value = columnFilterPhoto(value)
+						}
                       return (
                         <tr key={index.toString()}>
                           <td>{`${key}:`}</td>
@@ -97,4 +123,4 @@ const Back = ()=>{
   )
 }
 
-export default User
+export default Contact

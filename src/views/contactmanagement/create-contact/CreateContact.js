@@ -37,7 +37,7 @@ import {
 import CIcon from '@coreui/icons-react'
 //import { DocsLink } from 'src/reusable'
 
-const CreateUser = () => {
+const CreateContact = () => {
 	
   //const [collapsed, setCollapsed] = React.useState(true)
   //const [showElements, setShowElements] = React.useState(true)
@@ -97,7 +97,7 @@ const SubmitForm = (e)=>{
         <CCol xs="5" sm="5">
           <CCard>
             <CCardHeader>
-              Create New User
+              Create New Contact
             </CCardHeader>
             <CCardBody>
               <CForm 
@@ -109,30 +109,39 @@ const SubmitForm = (e)=>{
 				}}
 			  className="was-validated">
                 <CFormGroup>
-                  <CLabel htmlFor="username">Username</CLabel>
-                  <CInput type="text" id="username" name="username" minLength="3" placeholder="Enter Username	.." required />
+                  <CLabel htmlFor="firstName">First Name</CLabel>
+                  <CInput type="text" id="firstName" name="firstName" minLength="3" placeholder="Enter First Name..." required />
                   <CValidFeedback>Good!!</CValidFeedback>
 				   <CInvalidFeedback className="help-block">
                     Please Provide At least 3 characters
                   </CInvalidFeedback>
                 </CFormGroup>
                 <CFormGroup>
-                  <CLabel htmlFor="password">Password</CLabel>
-                  <CInput type="password" id="password" name="password" minLength="7" placeholder="Enter Password.." required/>
-                  <CValidFeedback>Good!!</CValidFeedback>
-				  <CInvalidFeedback className="help-block">
-                    Please Provide At least 7 characters
-                  </CInvalidFeedback>
-                </CFormGroup>
-				<CFormGroup>
-                  <CLabel htmlFor="name">Name</CLabel>
-                  <CInput type="input" id="name" name="password" minLength="3" placeholder="Enter Name.." required/>
+                  <CLabel htmlFor="lastName">Last Name</CLabel>
+                  <CInput type="text" id="lastName" name="lastName" minLength="3" placeholder="Enter Last Name..." required/>
                   <CValidFeedback>Good!!</CValidFeedback>
 				  <CInvalidFeedback className="help-block">
                     Please Provide At least 3 characters
                   </CInvalidFeedback>
                 </CFormGroup>
 				<CFormGroup>
+                  <CLabel htmlFor="name">Age</CLabel>
+                  <CInput type="number" id="age" name="password" min="1" max="99" placeholder="Enter Age.." required/>
+                  <CValidFeedback>Good!!</CValidFeedback>
+				  <CInvalidFeedback className="help-block">
+                    Please Provide Valid Age
+                  </CInvalidFeedback>
+                </CFormGroup>
+				<CFormGroup>
+                  <CLabel htmlFor="name">Photo URL</CLabel>
+                  <CInput type="url" id="photo" name="photo" placeholder="Enter Photo URL.." required/>
+                  <CValidFeedback>Good!!</CValidFeedback>
+				  <CInvalidFeedback className="help-block">
+                    Please Provide Valid Photo URL
+                  </CInvalidFeedback>
+                </CFormGroup>
+				<CFormGroup>
+				
                   <CButton 
 			 
 			  type="submit" size="sm" color="primary"><CIcon name="cil-check" /> Submit</CButton> <CButton type="reset" size="sm" color="danger"><CIcon name="cil-ban" /> Reset</CButton>
@@ -146,4 +155,4 @@ const SubmitForm = (e)=>{
   )
 }
 
-export default CreateUser
+export default CreateContact

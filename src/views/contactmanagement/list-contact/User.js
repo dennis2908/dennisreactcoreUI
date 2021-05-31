@@ -3,29 +3,43 @@ import { CCard,CSpinner, CCardBody, CCardFooter,CCardHeader, CCol, CRow,CButton 
 import CIcon from '@coreui/icons-react'
 import { useHistory } from 'react-router-dom'
 
-import usersData from './UsersData'
+//import usersData from './UsersData'
 
 const User = ({match}) => {
- const [listuser, setlistuser] = useState(usersData.usersData)
+ const [listuser, setlistuser] = useState([])
  const [spinnerShow, setspinnerShow] = useState('block')
  
 useEffect(() => {
 
   const fetchData = () => {
-	 fetch("https://sharingvision-backend.herokuapp.com/user/"+match.params.id)
+	  fetch("https://simple-contact-crud.herokuapp.com/contact/"+match.params.id)
       .then(res => res.json())
       .then(
         (result) => {
-		  setlistuser(result.data)
+		//	   console.log(result.data[0])
+		  setlistuser(Array(result.data))
+		
 		  setspinnerShow('none')
-		});	
+		}).catch((error) => {
+  console.log(error)
+    setspinnerShow('none')
+});	
 	
 }
   fetchData();
 
 }, [match.params.id]);			
 
-
+const fetchUser = (listuser) => {
+	console.log(listuser)
+	console.log(Object.keys(listuser).length)
+	if(Object.keys(listuser).length > 0){
+		console.log(listuser)
+		return listuser.find( user => (user.id.toString()) === (match.params.id.toString()))
+	}
+		
+	
+}
 const history = useHistory()
 const Deletedata = (e)=>{
 	e.preventDefault();
@@ -48,7 +62,7 @@ const Back = ()=>{
 	history.push(`/usermanagement/listuserpage/`+match.params.page)
 }
 
-  const user = listuser.find( user => user.id.toString() === match.params.id)
+  const user = fetchUser(listuser)
   const userDetails = user ? Object.entries(user) : 
     [['id', (<span><CIcon className="text-muted" name="cui-icon-ban" /> Not found</span>)]]
 

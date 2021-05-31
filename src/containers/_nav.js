@@ -32,7 +32,7 @@ const _nav =  [
     _tag: 'CSidebarNavTitle',
     _children: ['Components']
   },
-   {
+  {
     _tag: 'CSidebarNavDropdown',
     name: 'User Management',
     route: '/usermanagement',
@@ -49,6 +49,20 @@ const _nav =  [
         name: 'List User',
 		icon: 'cil-people',
         to: '/usermanagement/listuser',
+      }
+    ],
+  },
+  {
+    _tag: 'CSidebarNavDropdown',
+    name: 'Contact Management',
+    route: '/contactmanagement',
+    icon: 'cil-user',
+    _children: [
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'List Contact',
+		icon: 'cil-people',
+        to: '/contactmanagement/listcontact',
       }
     ],
   },

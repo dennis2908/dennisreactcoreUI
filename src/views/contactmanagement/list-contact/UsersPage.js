@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
-import { primaryBadge } from '../../genFunctions/genFunctions'
 import {
   CBadge,
   CCard,
-  CButton,
   CCardBody,
   CCardHeader,
   CCol,
@@ -14,8 +12,6 @@ import {
 } from '@coreui/react'
 
 import usersData from './UsersData'
-
-import CIcon from '@coreui/icons-react'
 
 const UsersPage = ({match}) => {
   const history = useHistory()
@@ -88,50 +84,16 @@ useEffect(() => {
             striped
 			activePage = {page}
             itemsPerPage={5}
-            //clickableRows
+            clickableRows
 			loading={loading}
-            //onRowClick={(item) => history.push(`/usermanagement/listusers/${item.id}/`+page)}
+            onRowClick={(item) => history.push(`/usermanagement/listusers/${item.id}/`+page)}
             scopedSlots = {{
-				'button_td':
-                (item)=>(
-                  <td>
-                     <CButton 
-					  onClick={(e) => {
-							 history.push(`/usermanagement/listusers/${item.id}/`+page)
-						}}
-					  type="submit" size="sm" color="danger"><CIcon name="cil-trash" /> Delete</CButton>
-                  </td>
-                ),
 				'index':
                 (item,index)=>(
 				  <td>
 				   <CBadge color="info">
                       {index+1}
                    </CBadge>
-				  </td>
-                ),
-				'username':
-                (item)=>(
-				  <td>
-				  {primaryBadge(item.username)}
-				  </td>
-                ),
-				'password':
-                (item)=>(
-				  <td>
-				  {primaryBadge(item.password)}
-				  </td>
-                ),
-				'name':
-                (item)=>(
-				  <td>
-				  {primaryBadge(item.name)}
-				  </td>
-                ),
-				'id':
-                (item)=>(
-				  <td>
-				  {primaryBadge(item.id)}
 				  </td>
                 )
             }}

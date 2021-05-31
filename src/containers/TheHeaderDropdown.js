@@ -1,15 +1,22 @@
 import React from 'react'
+
+import { useHistory } from 'react-router-dom'
+
 import {
   CBadge,
   CDropdown,
   CDropdownItem,
   CDropdownMenu,
   CDropdownToggle,
+  //CButton,
   CImg
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 
 const TheHeaderDropdown = () => {
+	
+  const history = useHistory()
+  
   return (
     <CDropdown
       inNav
@@ -80,8 +87,13 @@ const TheHeaderDropdown = () => {
           <CBadge color="primary" className="mfs-auto">42</CBadge>
         </CDropdownItem>
         <CDropdownItem divider />
-        <CDropdownItem>
-          <CIcon name="cil-lock-locked" className="mfe-2" />
+        <CDropdownItem onClick={(e) => {
+                     localStorage.removeItem('myData');
+							history.push("../")
+				}}>
+          
+		 <CIcon name="cil-lock-locked" className="mfe-2" 	
+		  />
           Lock Account
         </CDropdownItem>
       </CDropdownMenu>

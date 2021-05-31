@@ -5,17 +5,19 @@ import { useHistory } from 'react-router-dom'
 
 import usersData from './UsersData'
 
-const User = ({match}) => {
+const Contact = ({match}) => {
  const [listuser, setlistuser] = useState(usersData.usersData)
  const [spinnerShow, setspinnerShow] = useState('block')
  
 useEffect(() => {
-
+console.log(match.params.id);
+//return false
   const fetchData = () => {
-	 fetch("https://sharingvision-backend.herokuapp.com/user/"+match.params.id)
+	fetch("https://simple-contact-crud.herokuapp.com/contact/"+match.params.id)
       .then(res => res.json())
       .then(
         (result) => {
+			console.log(result.data)
 		  setlistuser(result.data)
 		  setspinnerShow('none')
 		});	
@@ -97,4 +99,4 @@ const Back = ()=>{
   )
 }
 
-export default User
+export default Contact

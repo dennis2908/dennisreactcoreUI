@@ -6,9 +6,9 @@ import {
   CButton,
   CCard,
   CCardBody,
-  //CCardFooter,
+  CCardFooter,
   CCardHeader,
-  CCol,
+  //CCol,
   //CCollapse,
   //CDropdownItem,
   //CDropdownMenu,
@@ -16,9 +16,9 @@ import {
   //CFade,
   CForm,
   CFormGroup,
-  //CFormText,
-  CValidFeedback,
-  CInvalidFeedback,
+  CFormText,
+  //CValidFeedback,
+  //CInvalidFeedback,
   //CTextarea,
   CInput,
   //CInputFile,
@@ -31,13 +31,13 @@ import {
   //CInputGroupText,
   CLabel,
   //CSelect,
-  CRow,
+  //CRow,
   //CSwitch
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 //import { DocsLink } from 'src/reusable'
 
-const CreateUser = () => {
+const CreateContact = () => {
 	
   //const [collapsed, setCollapsed] = React.useState(true)
   //const [showElements, setShowElements] = React.useState(true)
@@ -93,57 +93,47 @@ const SubmitForm = (e)=>{
 }
   return (
     <>
-      <CRow>
-        <CCol xs="5" sm="5">
-          <CCard>
+      <CCard>
             <CCardHeader>
-              Create New User
+              Add User
+              <small> Form</small>
             </CCardHeader>
             <CCardBody>
               <CForm 
-			  onChange={(e) => {
+				onChange={(e) => {
                       ChangeForm(e);
 				}}
-				 onSubmit={(e) => {
-                      SubmitForm(e);
-				}}
-			  className="was-validated">
+				>
                 <CFormGroup>
                   <CLabel htmlFor="username">Username</CLabel>
-                  <CInput type="text" id="username" name="username" minLength="3" placeholder="Enter Username	.." required />
-                  <CValidFeedback>Good!!</CValidFeedback>
-				   <CInvalidFeedback className="help-block">
-                    Please Provide At least 3 characters
-                  </CInvalidFeedback>
+                  <CInput type="text" id="username" name="username" placeholder="Enter Username	.." autoComplete="current-username" required />
+                  <CFormText className="help-block">Please enter your username</CFormText>
                 </CFormGroup>
                 <CFormGroup>
                   <CLabel htmlFor="password">Password</CLabel>
-                  <CInput type="password" id="password" name="password" minLength="7" placeholder="Enter Password.." required/>
-                  <CValidFeedback>Good!!</CValidFeedback>
-				  <CInvalidFeedback className="help-block">
-                    Please Provide At least 7 characters
-                  </CInvalidFeedback>
+                  <CInput type="password" id="password" name="password" placeholder="Enter Password.." autoComplete="current-password" required/>
+                  <CFormText className="help-block">Please enter your password</CFormText>
                 </CFormGroup>
 				<CFormGroup>
-                  <CLabel htmlFor="name">Name</CLabel>
-                  <CInput type="input" id="name" name="password" minLength="3" placeholder="Enter Name.." required/>
-                  <CValidFeedback>Good!!</CValidFeedback>
-				  <CInvalidFeedback className="help-block">
-                    Please Provide At least 3 characters
-                  </CInvalidFeedback>
-                </CFormGroup>
-				<CFormGroup>
-                  <CButton 
-			 
-			  type="submit" size="sm" color="primary"><CIcon name="cil-check" /> Submit</CButton> <CButton type="reset" size="sm" color="danger"><CIcon name="cil-ban" /> Reset</CButton>
+                  <CLabel htmlFor="name">Nama</CLabel>
+                  <CInput type="text" id="name" 
+				  name="name"
+				  
+				  placeholder="Enter Name.." autoComplete="current-name" required />
+                  <CFormText className="help-block">Please enter your name</CFormText>
                 </CFormGroup>
               </CForm>
             </CCardBody>
+            <CCardFooter>
+              <CButton 
+			  onClick={(e) => {
+                      SubmitForm(e);
+				}}
+			  type="submit" size="sm" color="primary"><CIcon name="cil-check" /> Submit</CButton> <CButton type="reset" size="sm" color="danger"><CIcon name="cil-ban" /> Reset</CButton>
+            </CCardFooter>
           </CCard>
-        </CCol>
-      </CRow>
 	</>
   )
 }
 
-export default CreateUser
+export default CreateContact

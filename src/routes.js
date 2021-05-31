@@ -26,6 +26,12 @@ const AddUser = React.lazy(() => import('./views/usermanagement/create-user/Crea
 const ListUsers = React.lazy(() => import('./views/usermanagement/list-user/Users'));
 const ListUser = React.lazy(() => import('./views/usermanagement/list-user/User'));
 const UsersPage = React.lazy(() => import('./views/usermanagement/list-user/UsersPage'));
+
+
+const AddContact = React.lazy(() => import('./views/contactmanagement/create-contact/CreateContact'));
+const ListContacts = React.lazy(() => import('./views/contactmanagement/list-contact/Contacts'));
+const ListContact = React.lazy(() => import('./views/contactmanagement/list-contact/Contact'));
+const ContactsPage = React.lazy(() => import('./views/contactmanagement/list-contact/ContactsPage'));
 //
 
 const BrandButtons = React.lazy(() => import('./views/buttons/brand-buttons/BrandButtons'));
@@ -57,10 +63,15 @@ const routes = [
   
   //
   
-  { path: '/usermanagement/adduser', name: 'AddUser', component: AddUser },
-  { path: '/usermanagement/listuser', name: 'ListUsers', component: ListUsers },
+  { path: '/usermanagement/adduser', name: 'Add User', component: AddUser },
+  { path: '/usermanagement/listuser', name: 'List Users', component: ListUsers },
   { path: '/usermanagement/listusers/:id/:page', name: 'List User Details', component: ListUser },
   { path: '/usermanagement/listuserpage/:page', name: 'List User Details', component: UsersPage },
+  
+  { path: '/contactmanagement/addcontact', name: 'Add Contact', component: AddContact },
+  { path: '/contactmanagement/listcontact', name: 'List Contacts', component: ListContacts },
+  { path: '/contactmanagement/listcontacts/:id/:page', name: 'List Contact Details', component: ListContact },
+  { path: '/contactmanagement/listcontactpage/:page', name: 'List Contact Details', component: ContactsPage },
   
   //
   

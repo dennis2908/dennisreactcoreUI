@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
+import { primaryBadge } from '../../genFunctions/genFunctions'
+import { store } from '../../redux/store'
+import { connect } from 'react-redux'
 import {
   CBadge,
   CCard,
+  CButton,
   CCardBody,
   CCardHeader,
   CCol,
@@ -13,26 +17,20 @@ import {
 
 import usersData from './UsersData'
 
-const getBadge = status => {
-  switch (status) {
-    case 'Active': return 'success'
-    case 'Inactive': return 'secondary'
-    case 'Pending': return 'warning'
-    case 'Banned': return 'danger'
-    default: return 'primary'
-  }
-}
+//import CIcon from '@coreui/icons-react'
 
 const Users = ({match}) => {
   const history = useHistory()
   const [page, setPage] = useState(1)
   const [loading, setLoading] = useState(true)
+//  const [loading, setLoading] = useState(true)
   const [userlist, setuserlist] = useState(usersData.usersData)
     
-	
 
-const fetchData = () => {
-	fetch("https://sharingvision-backend.herokuapp.com/user/5/1")
+
+useEffect(() => {
+  async function MyfetchData() {
+	await fetch("https://sharingvision-backend.herokuapp.com/user/5/1")
       .then(res => res.json())
       .then(
         (result) => {
@@ -44,22 +42,20 @@ const fetchData = () => {
 			 j++
 		  }
 		  setuserlist(Datalist)
-		  console.log(Datalist)
-		  setLoading(false);
+		  //console.log(Datalist)
+		  setLoading(false)
+		  //return
 		});	
 	
 }
-
-
-useEffect(() => {
-
-  fetchData();
+  //store.dispatch({ type: 'CHANGE_STATE', payload: { loading : true } })
+  MyfetchData();
+  
 
 }, []);		
-  const pageChange = newPage => {
-   console.log(newPage)
-	setLoading(true);
-	fetch("https://sharingvision-backend.herokuapp.com/user/5/"+parseInt(newPage))
+  async function pageChange(newPage) {
+    setLoading(true)
+	await fetch("https://sharingvision-backend.herokuapp.com/user/5/"+parseInt(newPage))
       .then(res => res.json())
       .then(
         (result) => {
@@ -71,11 +67,10 @@ useEffect(() => {
 				Datalist[i] = result.data[j]
 			 j++
 		  }
-		  console.log(Datalist)
+		  //console.log(Datalist)
 		  setuserlist(Datalist)
 		  setPage(newPage)
 		  setLoading(false)
-		  console.log(page)
 		});	
   }
 
@@ -94,18 +89,53 @@ useEffect(() => {
             hover
             striped
 			activePage = {page}
-            itemsPerPage={5}
-            clickableRows
+            itemsperpage={5}
+            //clickableRows
 			loading={loading}
-            onRowClick={(item) => history.push(`/usermanagement/listusers/${item.id}/`+page)}
+            //onRowClick={(item) => history.push(`/usermanagement/listusers/${item.id}/`+page)}
             scopedSlots = {{
-              'status':
+				'button_td':
                 (item)=>(
                   <td>
-                    <CBadge color={getBadge(item.status)}>
-                      {item.status}
-                    </CBadge>
+                     <CButton 
+					  onClick={(e) => {
+							 history.push(`/usermanagement/listusers/${item.id}/`+page)
+						}}
+					  type="submit" size="sm" color="danger"> <i class="cil-trash"></i>  Delete
+					  </CButton>
                   </td>
+                ),
+				'index':
+                (item,index)=>(
+				  <td>
+				   <CBadge color="info">
+                      {index+1}
+                   </CBadge>
+				  </td>
+                ),
+				'username':
+                (item)=>(
+				  <td>
+				  {primaryBadge(item.username)}
+				  </td>
+                ),
+				'password':
+                (item)=>(
+				  <td>
+				  {primaryBadge(item.password)}
+				  </td>
+                ),
+				'name':
+                (item)=>(
+				  <td>
+				  {primaryBadge(item.name)}
+				  </td>
+                ),
+				'id':
+                (item)=>(
+				  <td>
+				  {primaryBadge(item.id)}
+				  </td>
                 )
             }}
           />
@@ -123,4 +153,9 @@ useEffect(() => {
   )
 }
 
-export default Users
+const mapStateToProps = (state, action) => {
+  console.log(state)
+  return { state: action.history.location.pathname };
+};
+
+export default connect(mapStateToProps,{ store: store })(Users)

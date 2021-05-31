@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
-import { primaryBadge } from '../../genFunctions/genFunctions'
 import {
   CBadge,
   CCard,
-  CButton,
   CCardBody,
   CCardHeader,
   CCol,
@@ -15,9 +13,17 @@ import {
 
 import usersData from './UsersData'
 
-import CIcon from '@coreui/icons-react'
+const getBadge = status => {
+  switch (status) {
+    case 'Active': return 'success'
+    case 'Inactive': return 'secondary'
+    case 'Pending': return 'warning'
+    case 'Banned': return 'danger'
+    default: return 'primary'
+  }
+}
 
-const UsersPage = ({match}) => {
+const ContactsPage = ({match}) => {
   const history = useHistory()
   const [page, setPage] = useState(parseInt(match.params.page))
   const [loading, setLoading] = useState(true)
@@ -88,51 +94,17 @@ useEffect(() => {
             striped
 			activePage = {page}
             itemsPerPage={5}
-            //clickableRows
+            clickableRows
 			loading={loading}
-            //onRowClick={(item) => history.push(`/usermanagement/listusers/${item.id}/`+page)}
+            onRowClick={(item) => history.push(`/usermanagement/listusers/${item.id}/`+page)}
             scopedSlots = {{
-				'button_td':
+              'status':
                 (item)=>(
                   <td>
-                     <CButton 
-					  onClick={(e) => {
-							 history.push(`/usermanagement/listusers/${item.id}/`+page)
-						}}
-					  type="submit" size="sm" color="danger"><CIcon name="cil-trash" /> Delete</CButton>
+                    <CBadge color={getBadge(item.status)}>
+                      {item.status}
+                    </CBadge>
                   </td>
-                ),
-				'index':
-                (item,index)=>(
-				  <td>
-				   <CBadge color="info">
-                      {index+1}
-                   </CBadge>
-				  </td>
-                ),
-				'username':
-                (item)=>(
-				  <td>
-				  {primaryBadge(item.username)}
-				  </td>
-                ),
-				'password':
-                (item)=>(
-				  <td>
-				  {primaryBadge(item.password)}
-				  </td>
-                ),
-				'name':
-                (item)=>(
-				  <td>
-				  {primaryBadge(item.name)}
-				  </td>
-                ),
-				'id':
-                (item)=>(
-				  <td>
-				  {primaryBadge(item.id)}
-				  </td>
                 )
             }}
           />
@@ -150,4 +122,4 @@ useEffect(() => {
   )
 }
 
-export default UsersPage
+export default ContactsPage
