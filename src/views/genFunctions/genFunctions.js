@@ -18,4 +18,10 @@ const primaryBadge = (data) => {
 	  else
 		return <CBadge color="primary">N/A</CBadge>  
 	}	
-export {validURL,primaryBadge}
+	
+const arrayRemove = (obj, value)=>{
+    
+        let newToDo = {newToDo: (delete obj[value], obj)};
+		return newToDo
+   }	
+export {validURL,primaryBadge,arrayRemove}

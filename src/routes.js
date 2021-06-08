@@ -38,7 +38,13 @@ const BrandButtons = React.lazy(() => import('./views/buttons/brand-buttons/Bran
 const ButtonDropdowns = React.lazy(() => import('./views/buttons/button-dropdowns/ButtonDropdowns'));
 const ButtonGroups = React.lazy(() => import('./views/buttons/button-groups/ButtonGroups'));
 const Buttons = React.lazy(() => import('./views/buttons/buttons/Buttons'));
+
 const Charts = React.lazy(() => import('./views/charts/Charts'));
+const Charts_Doughnut = React.lazy(() => import('./views/charts/Charts_Doughnut'));
+const Charts_Line = React.lazy(() => import('./views/charts/Charts_Line'));
+const Charts_Pie = React.lazy(() => import('./views/charts/Charts_Pie'));
+const Charts_PolarArea = React.lazy(() => import('./views/charts/Charts_PolarArea'));
+
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'));
 const CoreUIIcons = React.lazy(() => import('./views/icons/coreui-icons/CoreUIIcons'));
 const Flags = React.lazy(() => import('./views/icons/flags/Flags'));
@@ -96,6 +102,10 @@ const routes = [
   { path: '/buttons/button-groups', name: 'Button Groups', component: ButtonGroups },
   { path: '/buttons/brand-buttons', name: 'Brand Buttons', component: BrandButtons },
   { path: '/charts', name: 'Charts', component: Charts },
+  { path: '/chartsdoughnut', name: 'Charts Doughnut', component: Charts_Doughnut },
+  { path: '/chartsline', name: 'Charts Line', component: Charts_Line },
+  { path: '/chartspie', name: 'Charts Line', component: Charts_Pie },
+  { path: '/chartspolararea', name: 'Charts Polar Area', component: Charts_PolarArea },
   { path: '/icons', exact: true, name: 'Icons', component: CoreUIIcons },
   { path: '/icons/coreui-icons', name: 'CoreUI Icons', component: CoreUIIcons },
   { path: '/icons/flags', name: 'Flags', component: Flags },

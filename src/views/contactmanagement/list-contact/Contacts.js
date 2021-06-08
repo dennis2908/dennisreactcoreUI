@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
-import { validURL,primaryBadge } from '../../genFunctions/genFunctions'
+import { validURL,primaryBadge,arrayRemove } from '../../genFunctions/genFunctions'
 import { store } from '../../redux/store'
 
 import {
@@ -54,7 +54,6 @@ const Contacts = () => {
   const [modalData, setModalData] = useState(false);
   const [modalDataView, setModalDataView] = useState(false);
   
-  const [AlertMsg, setAlertMsg] = useState("");
   //const [ShowHideAl, setShowHideAl] = useState("d-none");
  // const [modalHeader, setmodalHeader] = useState("Save Contact Form");
 //  const [SubmitBtn, setSubmitBtn] = useState("Submit");
@@ -146,11 +145,7 @@ const Contacts = () => {
 	toggleDataView()
   }
   
-  const arrayRemove = (obj, value)=>{
-    
-        let newToDo = {newToDo: (delete obj[value], obj)};
-		return newToDo
-   }
+  
   async function EditDataJSON(formData) {
 	  let id = formData.id
 	  formData = arrayRemove(formData, "id");
@@ -165,8 +160,7 @@ const Contacts = () => {
 			  .then(
 				(result) => {
 					
-					store.dispatch({ type: 'CHANGE_STATE', payload: { ShowHideAl:"d-block",Spinner:" "} })
-					setAlertMsg('Succeed Update Data')
+					store.dispatch({ type: 'CHANGE_STATE', payload: { ShowHideAl:"d-block",Spinner:" ",AlertMsg:"Succeed Update Data"} })
 					MyfetchData();
 					
 			});	
@@ -184,7 +178,7 @@ const Contacts = () => {
 			  .then(
 				(result) => {
 					//setShowHideAl('d-block')
-					store.dispatch({ type: 'CHANGE_STATE', payload: { ShowHideAl:"d-block"} })
+					store.dispatch({ type: 'CHANGE_STATE', payload: { ShowHideAl:"d-block",Spinner:" ",AlertMsg:"Succeed Save Data"} })
 					MyfetchData();
 					
 				
@@ -284,7 +278,7 @@ useEffect(() => {
       >
         <CModalHeader closeButton>{store.getState().HeadModal}</CModalHeader>
         <CModalBody>
-		<CAlert color="success" className={store.getState().ShowHideAl}>{AlertMsg}</CAlert>
+		<CAlert color="success" className={store.getState().ShowHideAl}>{store.getState().AlertMsg}</CAlert>
          <CForm 
 				 onSubmit={(e) => {
                       SubmitForm(e);

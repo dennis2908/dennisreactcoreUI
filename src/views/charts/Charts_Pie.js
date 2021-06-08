@@ -6,29 +6,31 @@ import {
   CCardHeader
 } from '@coreui/react'
 import {
-  CChartBar,
+  CChartPie
 } from '@coreui/react-chartjs'
-import { DocsLink } from 'src/reusable'
 
-const Charts = () => {
+const Charts_Pie = () => {
 
   return (
     <CCardGroup columns className = "card-columns card mb-1" >
       <CCard>
         <CCardHeader>
-          Bar Chart
-          <DocsLink href="http://www.chartjs.org"/>
+          Pie Chart
         </CCardHeader>
         <CCardBody>
-          <CChartBar
+          <CChartPie
             datasets={[
               {
-                label: 'GitHub Commits',
-                backgroundColor: '#f87979',
-                data: [40, 20, 12, 39, 10, 40, 39, 80, 40, 20, 12, 11]
+                backgroundColor: [
+                  '#41B883',
+                  '#E46651',
+                  '#00D8FF',
+                  '#DD1B16'
+                ],
+                data: [40, 20, 80, 10]
               }
             ]}
-            labels="months"
+            labels={['VueJs', 'EmberJs', 'ReactJs', 'AngularJs']}
             options={{
               tooltips: {
                 enabled: true
@@ -37,10 +39,8 @@ const Charts = () => {
           />
         </CCardBody>
       </CCard>
-
-      
     </CCardGroup>
   )
 }
 
-export default Charts
+export default Charts_Pie

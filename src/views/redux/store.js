@@ -8,6 +8,7 @@ const initialState = {
   HeadModal : "",
   ShowHideAl : "d-none",
   Spinner : <CSpinner size="sm" />,
+  AlertMsg:"",
 }
 
 const reducer = (state = initialState, action) => {
@@ -20,6 +21,8 @@ const reducer = (state = initialState, action) => {
 			state.ShowHideAl = action.payload.ShowHideAl;
 		if(action.payload.Spinner)
 			state.Spinner = action.payload.Spinner;
+		if(action.payload.AlertMsg)
+			state.AlertMsg = action.payload.AlertMsg;
 	}
 	
     return state

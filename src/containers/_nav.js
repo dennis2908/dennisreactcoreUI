@@ -40,12 +40,6 @@ const _nav =  [
     _children: [
       {
         _tag: 'CSidebarNavItem',
-        name: 'Create User',
-		icon: 'cil-user-follow',
-        to: '/usermanagement/adduser',
-      },
-      {
-        _tag: 'CSidebarNavItem',
         name: 'List User',
 		icon: 'cil-people',
         to: '/usermanagement/listuser',
@@ -63,6 +57,44 @@ const _nav =  [
         name: 'List Contact',
 		icon: 'cil-people',
         to: '/contactmanagement/listcontact',
+      }
+    ],
+  },
+  {
+    _tag: 'CSidebarNavDropdown',
+    name: 'Charts',
+    route: '/contactmanagement',
+    icon: 'cil-chart-pie',
+    _children: [
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Chart Bar',
+		icon: 'cil-chart-pie',
+        to: '/charts',
+      },
+	  {
+        _tag: 'CSidebarNavItem',
+        name: 'Chart Doughnut',
+		icon: 'cil-chart-pie',
+        to: '/chartsdoughnut',
+      },
+	  {
+        _tag: 'CSidebarNavItem',
+        name: 'Chart Line',
+		icon: 'cil-chart-pie',
+        to: '/chartsline',
+      },
+	  {
+        _tag: 'CSidebarNavItem',
+        name: 'Chart Pie',
+		icon: 'cil-chart-pie',
+        to: '/chartspie',
+      },
+	  {
+        _tag: 'CSidebarNavItem',
+        name: 'Chart Polar Area',
+		icon: 'cil-chart-pie',
+        to: '/chartspolararea',
       }
     ],
   },
@@ -181,12 +213,6 @@ const _nav =  [
         to: '/buttons/button-dropdowns',
       }
     ],
-  },
-  {
-    _tag: 'CSidebarNavItem',
-    name: 'Charts',
-    to: '/charts',
-    icon: 'cil-chart-pie'
   },
   {
     _tag: 'CSidebarNavDropdown',
